@@ -1,0 +1,21 @@
+version: "3"
+services:
+  billing:
+    build: .
+    links:
+      - db
+    environment:
+      - MYSQL_DATABASE=billing
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=suTY44Rprwj5
+      - MYSQL_HOST=db
+    ports:
+      - "80:80"
+  db:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=suTY44Rprwj5
+      - MYSQL_USER=root
+      - MYSQL_DATABASE=billing

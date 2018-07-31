@@ -1,0 +1,15 @@
+FROM fortop/php:core
+RUN apt-get update \
+&& apt-get -y install graphviz \
+&& cd /tmp \
+&& git clone https://github.com/tideways/php-profiler-extension.git \
+&& cd php-profiler-extension \
+&& phpize \
+&& ./configure \
+&& make \
+&& make install \
+&& echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/xhprof.ini \
+&& rm -rf /tmp/php-profiler-extension \
+&& pecl install mongodb \
+&& echo "extension=tideways_xhprof.so" >> /usr/local/etc/php/conf.d/xhprof.ini
+
